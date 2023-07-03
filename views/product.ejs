@@ -1,0 +1,50 @@
+<%- include('parts/header') %>
+    <%- include('parts/nav') %>
+        <div class="container">
+            <div class="row">
+                <% if(!product) {%>
+                    <div class="alert alert-danger">
+                        <p>There is no products matching</p>
+                    </div>
+                    <% } else { %>
+                        <div class="col col-12 col-md-6">
+                            <div class="card border-dark mb-3" style="width: 18rem;">
+                                <img src="/<%= product.image %>" class="card-img-top" style="height:250px">
+                                <div class="card-body">
+                                    <form action="/cart" method="POST">
+                                        <input type="number" name="amount" class="form-control">
+                                        <input type="hidden" name="name" value="<%= product.name %>">
+                                        <input type="hidden" name="price" value="<%= product.price %>">
+                                        <input type="hidden" name="productId" value="<%= product._id %>">
+                                        <input type="hidden" name="redirectTo" value="/product/<%= product._id %>">
+                                        <input type="submit" value="Add To Carts" class="btn btn-primary">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col col-12 col-md-6">
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <%= product.name %>
+                                    </h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">
+                                        Price : <%= product.price %> $
+                                    </h6>
+                                    <p class="card-text">
+                                        <%= product.description %>
+                                    </p>
+                                    <a href="#" class="card-link">Card link</a>
+                                    <a href="#" class="card-link">Another link</a>
+                                </div>
+                            </div>
+                        </div>
+            </div>
+            <% } %>
+                <% if(validationError) { %>
+                    <p class="alert alert-danger">
+                        <%= validationError.msg %>
+                    </p>
+                    <% } %>
+        </div>
+        <%- include('parts/footer') %>

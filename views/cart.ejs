@@ -1,0 +1,67 @@
+<%- include('parts/header.ejs') %>
+    <link rel="stylesheet" href="/css/style.css" />
+    <%- include('parts/nav.ejs') %>
+        <div class="container">
+            <% if (items.length===0) { %>
+                <p class="alert alert-danger">
+                    don't have any item
+                </p>
+                <% } else { %>
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>No</td>
+                                <td>Product name</td>
+                                <td>Price</td>
+                                <td>Amount</td>
+                                <td>Total</td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(let i=0 ; i<items.length ; i++ ) { %>
+                                <tr>
+                                    <td>
+                                        <%= i+1 %>
+                                    </td>
+                                    <td>
+                                        <%= items[i].name %>
+                                    </td>
+                                    <td>
+                                        <%= items[i].price %>$
+                                    </td>
+                                    <form method="POST">
+                                        <td> <input type="number" name="amount" class="form-control"
+                                                value="<%= items[i].amount %>"></td>
+                                        <td>
+                                            <%= items[i].amount * items[i].price %> $
+                                        </td>
+                                        <td>
+                                            <input type="hidden" name="cartId" value="<%= items[i]._id %>">
+                                            <input type="submit" value="Save" class="btn btn-success"
+                                                formaction="/cart/save">
+                                            <input type="submit" value="Delete" class="btn btn-danger"
+                                                formaction="/cart/delete">
+                                            <input type="submit" value="Order" class="btn btn-success"
+                                                formaction="/cart/verify">
+                                        </td>
+                                    </form>
+                                </tr>
+                                <% } %>
+                        </tbody>
+                    </table>
+                    <form method="POST" class="twoM">
+                        <td><input type="submit" value="Delete All" class="btn btn-danger" formaction="/cart/deleteAll">
+                        </td>
+                        <td><input type="submit" value="Order All" class="btn btn-success" formaction="/cart/orderAll">
+                        </td>
+                    </form>
+                    <% } %>
+                        <br>
+                        <% if(validationError) { %>
+                            <p class="alert alert-danger">
+                                <%= validationError.msg %>
+                            </p>
+                            <% } %>
+        </div>
+        <%- include('parts/footer.ejs') %>

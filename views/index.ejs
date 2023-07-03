@@ -1,0 +1,62 @@
+<!-- root is index file -->
+<%- include('parts/header') %>
+    <%- include('parts/nav') %>
+        <div class="container">
+            <form action="/" method="GET">
+                <select class="form-select" style="margin-top: 20px;" name="category">
+                    <option value="Categorys">Categorys</option>
+                    <option value="clothes">Clothes</option>
+                    <option value="phones">Phones</option>
+                    <option value="laptops">Laptop</option>
+                    <option value="cars">Cars</option>
+                </select>
+                <button type="submit" class="btn btn-primary mb-3" style="margin-top: 10px;">Filter</button>
+            </form>
+            <% if(validationError) { %>
+                <p class="alert alert-danger">
+                    <%= validationError.msg %>
+                </p>
+                <% } %>
+                    <div class="row">
+                        <% if(products.length===0 ) {%>
+                            <div class="alert alert-danger">
+                                <p>THERE IS NOW PRODUCTS</p>
+                            </div>
+                            <% }else { %>
+                                <% for(let product of products) { %>
+                                    <div class="col col-12 col-md-6 col-lg-4 col-xl-3 ">
+                                        <div class="card border-dark mb-3" style="width: 18rem;">
+                                            <img src="/<%= product.image %>" class="card-img-top" style="height:250px">
+                                            <div class="card-body">
+                                                <h4 class="card-title">
+                                                    <a href="/product/<%= product._id %>">
+                                                        <%= product.name %>
+                                                    </a>
+                                                </h4>
+                                                <p>
+                                                    Price : <%= product.price %> $
+                                                </p>
+                                                <form action="/cart" method="POST" class="add-to-cart-form">
+                                                    <input type="number" name="amount" class="form-control">
+                                                    <input type="hidden" name="name" value="<%= product.name %>">
+                                                    <input type="hidden" name="price" value="<%= product.price %>">
+                                                    <input type="hidden" name="productId" value="<%= product._id %>">
+                                                    <input type="hidden" name="redirectTo" value="/">
+                                                    <input type="submit" value="Add To Cart" class="btn btn-primary">
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <% } %>
+                                        <% } %>
+                    </div>
+
+
+
+
+
+        </div>
+        </div>
+
+
+        <%- include('parts/footer') %>

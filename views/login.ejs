@@ -1,0 +1,35 @@
+<%- include('parts/header.ejs') %>
+    <link rel="stylesheet" href="/css/style.css" />
+    <%- include('parts/nav.ejs') %>
+        <form action="/login" style="border:1px solid #ccc" method="POST">
+            <div class="container">
+                <h1>log In</h1>
+                <p>Please enter your email and password to login</p>
+                <hr>
+                <label for="email"><b>Email</b></label>
+                <input type="text" placeholder="Enter Email" name="email">
+                <% let emailError=validationError.find(err=> err.param ==='email') %>
+                    <% if(emailError) { %>
+                        <p class="alert alert-danger">
+                            <%= emailError.msg %>
+                        </p>
+                        <% } %>
+                            <label for="psw"><b>Password</b></label>
+                            <input type="password" placeholder="Enter Password" name="password">
+                            <% let passwordError=validationError.find(err=> err.param ==='password') %>
+                                <% if(passwordError) { %>
+                                    <p class="alert alert-danger">
+                                        <%= passwordError.msg %>
+                                    </p>
+                                    <% } %>
+                                        <div class="clearfix">
+                                            <a href="/">
+                                                <button type="button" class="cancelbtn">
+                                                    Cancel
+                                                </button>
+                                            </a>
+                                            <button type="submit" class="signupbtn">Log In</button>
+                                        </div>
+            </div>
+        </form>
+        <%- include('parts/footer.ejs') %>

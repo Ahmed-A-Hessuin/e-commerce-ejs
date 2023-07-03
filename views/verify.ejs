@@ -1,0 +1,14 @@
+<%- include('parts/header.ejs') %>
+    <%- include('parts/navBar.ejs') %>
+        <div class="container">
+            <form action="/order" method="POST"></form>
+            <div class="mb-3">
+                <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Your address"
+                    name="address">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-3">Order</button>
+            </div>
+        </div>
+
+        <%- include('parts/footer.ejs') %>
