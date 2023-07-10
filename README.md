@@ -1,3 +1,4 @@
 # e-commerce-ejs
-e-commerce Project Using (NodeJS , MongoDB , Bootstrap) , 
-download node_module
+Using (NodeJS , express , MongoDB , java Script , Bootstrap , ejs)
+
+download node_module and to login you can create new email to see another feature  
